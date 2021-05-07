@@ -53,6 +53,48 @@ public class Controller {
 	    }
 	  } );
 	
+	view.getMenuAddVyrobce().addActionListener(new ActionListener() { 
+	    public void actionPerformed(ActionEvent e) {
+		AddVyrobceDialog hd = new AddVyrobceDialog(view, model);
+		hd.setVisible(true);
+		hd.getBtnCancel().addActionListener(new ActionListener() {
+	 
+	            public void actionPerformed(ActionEvent e) {
+	               hd.dispose();
+		       hd.setVisible(false);
+	            }
+	        });
+	    }
+	  } );
+	
+	view.getMenuAddNastroj().addActionListener(new ActionListener() { 
+	    public void actionPerformed(ActionEvent e) {
+		AddNastrojDialog nd = new AddNastrojDialog(view, model);
+		nd.setVisible(true);
+		nd.getBtnCancel().addActionListener(new ActionListener() {
+	 
+	            public void actionPerformed(ActionEvent e) {
+	               nd.dispose();
+		       nd.setVisible(false);
+	            }
+	        });
+	    }
+	  } );
+	
+	view.getMenuAddNastrojToVlastnik().addActionListener(new ActionListener() { 
+	    public void actionPerformed(ActionEvent e) {
+		AddNastrojToVlastnikDialog nd = new AddNastrojToVlastnikDialog(view, model);
+		nd.setVisible(true);
+		nd.getBtnCancel().addActionListener(new ActionListener() {
+	 
+	            public void actionPerformed(ActionEvent e) {
+	               nd.dispose();
+		       nd.setVisible(false);
+	            }
+	        });
+	    }
+	  } );
+	
 	view.getMenuReadHudebnik().addActionListener(new ActionListener() { 
 	    public void actionPerformed(ActionEvent e) {
 		String s = "";
@@ -93,6 +135,110 @@ public class Controller {
 		    view.getTableModel().addRow(new Object[]{v.getIdVlastnik(), v.getJmeno(), v.getPrijmeni(), v.getRodneCislo(), v.getPocetNastroju()});
 		}
 		view.currentTableType = EntityType.VLASTNIK;
+		view.repaint();
+	    }
+	  } );
+	
+	view.getMenuReadVyrobce().addActionListener(new ActionListener() { 
+	    public void actionPerformed(ActionEvent e) {
+		String s = "";
+		List<Vyrobce> l = model.getListOfVyrobce();
+		for(Vyrobce v : l){
+		    s += v.getId_vyrobce() + " " + v.getNazev() + " " + v.getSidlo() + "\n";
+		}
+		
+		view.getTextArea().setText(s);
+		
+		view.getTableModel().setRowCount(0);
+		String[] cols = {"Id", "Název", "Sídlo"};
+		view.getTableModel().setColumnIdentifiers(cols);
+		for(Vyrobce v : l){
+		    view.getTableModel().addRow(new Object[]{v.getId_vyrobce(), v.getNazev(), v.getSidlo()});
+		}
+		view.currentTableType = EntityType.VYROBCE;
+		view.repaint();
+	    }
+	  } );
+	
+	view.getMenuReadNastroj().addActionListener(new ActionListener() { 
+	    public void actionPerformed(ActionEvent e) {
+		String s = "";
+		List<Nastroj> l = model.getListOfNastroj();
+		for(Nastroj n : l){
+		    s += n.getVyrobce() + " " + n.getCislo() + " " + n.getNazev() + " " + n.getCena() + "\n";
+		}
+		
+		view.getTextArea().setText(s);
+		
+		view.getTableModel().setRowCount(0);
+		String[] cols = {"Id", "Výrobce", "Číslo", "Název", "Cena"};
+		view.getTableModel().setColumnIdentifiers(cols);
+		for(Nastroj n : l){
+		    view.getTableModel().addRow(new Object[]{n.getId_nastroj(), n.getVyrobce(), n.getCislo(), n.getNazev(), n.getCena()});
+		}
+		view.currentTableType = EntityType.NASTROJ;
+		view.repaint();
+	    }
+	  } );
+	
+	view.getMenuReadNastrojWithVlastnik().addActionListener(new ActionListener() { 
+	    public void actionPerformed(ActionEvent e) {
+		String s = "";
+		List<Nastroj> l = model.getListOfNastroj();
+		for(Nastroj n : l){
+		    List<Vlastnik> vl = n.getVlastnikList();
+		    String ss = "";
+		    for(Vlastnik v : vl){
+			ss += v.getJmeno() + " " + v.getPrijmeni() + ", ";
+		    }
+		    s += n.getVyrobce() + " " + n.getCislo() + " " + n.getNazev() + " " + n.getCena() + " " + ss + "\n";
+		}
+		
+		view.getTextArea().setText(s);
+		
+		view.getTableModel().setRowCount(0);
+		String[] cols = {"Id", "Výrobce", "Číslo", "Název", "Cena", "Vlastníci"};
+		view.getTableModel().setColumnIdentifiers(cols);
+		for(Nastroj n : l){
+		    List<Vlastnik> vl = n.getVlastnikList();
+		    String ss = "";
+		    for(Vlastnik v : vl){
+			ss += v.getJmeno() + " " + v.getPrijmeni() + ", ";
+		    }
+		    view.getTableModel().addRow(new Object[]{n.getId_nastroj(), n.getVyrobce(), n.getCislo(), n.getNazev(), n.getCena(), ss});
+		}
+		view.currentTableType = EntityType.NASTROJ;
+		view.repaint();
+	    }
+	  } );
+	
+	view.getMenuReadVlastnikWithNastroj().addActionListener(new ActionListener() { 
+	    public void actionPerformed(ActionEvent e) {
+		String s = "";
+		List<Vlastnik> l = model.getListOfVlastnik();
+		for(Vlastnik v : l){
+		    List<Nastroj> nl = v.getNastrojList();
+		    String ss = "";
+		    for(Nastroj n : nl){
+			ss += n.getNazev() + ", ";
+		    }
+		    s += v.getJmeno() + " " + v.getPrijmeni() + " " + v.getRodneCislo() + " " + v.getPocetNastroju() + " " + ss + "\n";
+		}
+		
+		view.getTextArea().setText(s);
+		
+		view.getTableModel().setRowCount(0);
+		String[] cols = {"Jméno", "Příjmení", "Rodné číslo", "Počet nástrojů", "Nástroje"};
+		view.getTableModel().setColumnIdentifiers(cols);
+		for(Vlastnik v : l){
+		    List<Nastroj> nl = v.getNastrojList();
+		    String ss = "";
+		    for(Nastroj n : nl){
+			ss += n.getNazev() + ", ";
+		    }
+		    view.getTableModel().addRow(new Object[]{v.getJmeno(), v.getPrijmeni(), v.getRodneCislo(), v.getPocetNastroju(), ss});
+		}
+		view.currentTableType = EntityType.NASTROJ;
 		view.repaint();
 	    }
 	  } );
@@ -181,10 +327,94 @@ public class Controller {
 	    }
 	  } );
 	
+	view.getMenuRemoveVyrobce().addActionListener(new ActionListener() { 
+	    public void actionPerformed(ActionEvent e) {
+		String s = (String)JOptionPane.showInputDialog(
+			"Id"
+		);
+		if(s == null){
+		    return;
+		}
+		int i = -1;
+		boolean ok = true;
+		try{
+			    i = Integer.parseInt(s);
+			    
+			}catch (NumberFormatException nfe) {
+			    ok = false;
+			    JOptionPane.showMessageDialog(view,
+                            "Nesprávný formát id",
+                            "Špatná data",
+                            JOptionPane.WARNING_MESSAGE);
+			}
+		boolean rem = false;
+		if(ok){
+		    List<Vyrobce> l = model.getListOfVyrobce();
+		    for(Vyrobce v : l){
+			if(v.getId_vyrobce()== i){
+			    rem = true;
+			    break;
+			}
+		    }
+		    if(rem){
+			model.removeVyrobce(i);
+		    }
+		    else{
+			JOptionPane.showMessageDialog(view,
+                            "Výrobce se zadaným id neexistuje",
+                            "Špatná data",
+                            JOptionPane.WARNING_MESSAGE);
+		    }
+		}
+	    }
+	  } );
+	
+	view.getMenuRemoveNastroj().addActionListener(new ActionListener() { 
+	    public void actionPerformed(ActionEvent e) {
+		String s = (String)JOptionPane.showInputDialog(
+			"Id"
+		);
+		if(s == null){
+		    return;
+		}
+		int i = -1;
+		boolean ok = true;
+		try{
+			    i = Integer.parseInt(s);
+			    
+			}catch (NumberFormatException nfe) {
+			    ok = false;
+			    JOptionPane.showMessageDialog(view,
+                            "Nesprávný formát id",
+                            "Špatná data",
+                            JOptionPane.WARNING_MESSAGE);
+			}
+		boolean rem = false;
+		if(ok){
+		    List<Nastroj> l = model.getListOfNastroj();
+		    for(Nastroj n : l){
+			if(n.getId_nastroj() == i){
+			    rem = true;
+			    break;
+			}
+		    }
+		    if(rem){
+			model.removeNastroj(i);
+		    }
+		    else{
+			JOptionPane.showMessageDialog(view,
+                            "Nástroj se zadaným id neexistuje",
+                            "Špatná data",
+                            JOptionPane.WARNING_MESSAGE);
+		    }
+		}
+	    }
+	  } );
+	
 	view.getDeleteRow().addActionListener(new ActionListener() { 
 	    public void actionPerformed(ActionEvent e) {
 		if((int)view.table.getSelectedRow() >= 0){
-		    int id = (int)view.table.getValueAt(view.table.getSelectedRow(), 0);
+		    int id = Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString());
 		    int n = JOptionPane.showConfirmDialog(
 			view,
 			"Opravdu chcete odstranit záznam?",
@@ -195,7 +425,37 @@ public class Controller {
 			    model.removeHudebnik(id);
 			}
 			else if(view.currentTableType == EntityType.VLASTNIK){
+			    Vlastnik v = null;
+			    List<Vlastnik> vv = model.getListOfVlastnik();
+			    for(Vlastnik vl : vv){
+				if(vl.getIdVlastnik() == id){
+				    v = vl;
+				    break;
+				}
+			    }
+			    List<Nastroj> nl = v.getNastrojList();
+			    for(Nastroj na : nl){
+				na.removeVlastnik(v);
+			    }
 			    model.removeVlastnik(id);
+			}
+			else if(view.currentTableType == EntityType.VYROBCE){
+			    model.removeVyrobce(id);
+			}
+			else if(view.currentTableType == EntityType.NASTROJ){
+			    Nastroj na = null;
+			    List<Nastroj> nn = model.getListOfNastroj();
+			    for(Nastroj nl : nn){
+				if(nl.getId_nastroj() == id){
+				    na = nl;
+				    break;
+				}
+			    }
+			    List<Vlastnik> vl = na.getVlastnikList();
+			    for(Vlastnik va : vl){
+				va.removeNastroj(na);
+			    }
+			    model.removeNastroj(id);
 			}
 			view.tableModel.removeRow(view.table.getSelectedRow());
 		    }
@@ -219,8 +479,17 @@ public class Controller {
 			    uvd.setVisible(true);
 			    view.getMenuReadVlastnik().doClick();
 			}
+			else if(view.currentTableType == EntityType.VYROBCE){
+			    UpdateVyrobceDialog uvd = new UpdateVyrobceDialog(view, model, id);
+			    uvd.setVisible(true);
+			    view.getMenuReadVyrobce().doClick();
+			}
+			else if(view.currentTableType == EntityType.NASTROJ){
+			    UpdateNastrojDialog und = new UpdateNastrojDialog(view, model, id);
+			    und.setVisible(true);
+			    view.getMenuReadNastroj().doClick();
+			}
 		    }
-		
 		view.table.repaint();
 		view.table.clearSelection();
 		

@@ -73,17 +73,17 @@ public class AddVlastnikDialog extends JDialog{
         cs.gridwidth = 2;
         panel.add(tfBirthDateNumber, cs);
 	
-	lbInstrumentNumber = new JLabel("Počet nástrojů: ");
-        cs.gridx = 0;
-        cs.gridy = 3;
-        cs.gridwidth = 1;
-        panel.add(lbInstrumentNumber, cs);
- 
-        tfInstrumentNumber = new JTextField(20);
-        cs.gridx = 2;
-        cs.gridy = 3;
-        cs.gridwidth = 2;
-        panel.add(tfInstrumentNumber, cs);
+//	lbInstrumentNumber = new JLabel("Počet nástrojů: ");
+//        cs.gridx = 0;
+//        cs.gridy = 3;
+//        cs.gridwidth = 1;
+//        panel.add(lbInstrumentNumber, cs);
+// 
+//        tfInstrumentNumber = new JTextField(20);
+//        cs.gridx = 2;
+//        cs.gridy = 3;
+//        cs.gridwidth = 2;
+//        panel.add(tfInstrumentNumber, cs);
 	
 	
         panel.setBorder(new LineBorder(Color.GRAY));
@@ -93,7 +93,7 @@ public class AddVlastnikDialog extends JDialog{
 	
 	btnAdd.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
-			String s = tfSurName.getText() + " " + tfName.getText() + " " + tfBirthDateNumber.getText() + " " + tfInstrumentNumber.getText() + "\n";
+			String s = tfSurName.getText() + " " + tfName.getText() + " " + tfBirthDateNumber.getText() + "\n";// + " " + tfInstrumentNumber.getText() + "\n";
 			List<Vlastnik> vlastnici = model.getListOfVlastnik();
 			boolean ok = true;
 			for(Vlastnik v : vlastnici){
@@ -118,25 +118,25 @@ public class AddVlastnikDialog extends JDialog{
 				JOptionPane.WARNING_MESSAGE);
 				    dispose();
 			    }
-			    try{
-				long j = Long.parseLong(tfInstrumentNumber.getText());
-				if(Integer.parseInt(tfInstrumentNumber.getText()) <= 0){
-				    ok = false;
-				JOptionPane.showMessageDialog(AddVlastnikDialog.this,
-				"Počet nástrojů není kladné číslo",
-				"Špatná data",
-				JOptionPane.WARNING_MESSAGE);
-				    dispose();
-				}
-			    }
-			    catch(NumberFormatException nfe){
-				ok = false;
-				JOptionPane.showMessageDialog(AddVlastnikDialog.this,
-				"Počet nástrojů není celé číslo",
-				"Špatná data",
-				JOptionPane.WARNING_MESSAGE);
-				    dispose();
-			    }
+//			    try{
+//				long j = Long.parseLong(tfInstrumentNumber.getText());
+//				if(Integer.parseInt(tfInstrumentNumber.getText()) <= 0){
+//				    ok = false;
+//				JOptionPane.showMessageDialog(AddVlastnikDialog.this,
+//				"Počet nástrojů není kladné číslo",
+//				"Špatná data",
+//				JOptionPane.WARNING_MESSAGE);
+//				    dispose();
+//				}
+//			    }
+//			    catch(NumberFormatException nfe){
+//				ok = false;
+//				JOptionPane.showMessageDialog(AddVlastnikDialog.this,
+//				"Počet nástrojů není celé číslo",
+//				"Špatná data",
+//				JOptionPane.WARNING_MESSAGE);
+//				    dispose();
+//			    }
 			}catch (NumberFormatException nfe) {
 			    ok = false;
 			    JOptionPane.showMessageDialog(AddVlastnikDialog.this,
@@ -147,7 +147,7 @@ public class AddVlastnikDialog extends JDialog{
 			}
 			if(ok){
 			    
-	               model.addVlastnik(tfSurName.getText(), tfName.getText(), tfBirthDateNumber.getText(), Integer.parseInt(tfInstrumentNumber.getText()));
+	               model.addVlastnik(tfSurName.getText(), tfName.getText(), tfBirthDateNumber.getText());//, Integer.parseInt(tfInstrumentNumber.getText()));
 		       JOptionPane.showMessageDialog(AddVlastnikDialog.this,
                             "Ok",
                             "Záznam úspěšně přidán",

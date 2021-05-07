@@ -59,17 +59,17 @@ public class UpdateVlastnikDialog extends JDialog{
         cs.gridwidth = 2;
         panel.add(tfName, cs);
 	
-	lbInstrumentNumber = new JLabel("Počet nástrojů: ");
-        cs.gridx = 0;
-        cs.gridy = 2;
-        cs.gridwidth = 1;
-        panel.add(lbInstrumentNumber, cs);
- 
-        tfInstrumentNumber = new JTextField(20);
-        cs.gridx = 1;
-        cs.gridy = 2;
-        cs.gridwidth = 2;
-        panel.add(tfInstrumentNumber, cs);
+//	lbInstrumentNumber = new JLabel("Počet nástrojů: ");
+//        cs.gridx = 0;
+//        cs.gridy = 2;
+//        cs.gridwidth = 1;
+//        panel.add(lbInstrumentNumber, cs);
+// 
+//        tfInstrumentNumber = new JTextField(20);
+//        cs.gridx = 1;
+//        cs.gridy = 2;
+//        cs.gridwidth = 2;
+//        panel.add(tfInstrumentNumber, cs);
 	
         panel.setBorder(new LineBorder(Color.GRAY));
  
@@ -79,7 +79,7 @@ public class UpdateVlastnikDialog extends JDialog{
 	btnAdd.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
 			try{
-			    model.updateVlastnik(idToUpdate, tfSurName.getText(), tfName.getText(), Integer.parseUnsignedInt(tfInstrumentNumber.getText()));
+			    model.updateVlastnik(idToUpdate, tfSurName.getText(), tfName.getText());//, Integer.parseUnsignedInt(tfInstrumentNumber.getText()));
 			}
 			catch(NumberFormatException nfe){
 			    JOptionPane.showMessageDialog(parent,

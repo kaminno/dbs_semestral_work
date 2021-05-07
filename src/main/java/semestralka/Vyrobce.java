@@ -41,4 +41,9 @@ public class Vyrobce {
     public String getSidlo() {
 	return sidlo;
     }
+
+    @Override
+    public String toString() {
+	return nazev + " " + sidlo + "\n";
+    }
 }

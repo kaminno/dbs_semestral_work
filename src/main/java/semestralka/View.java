@@ -41,10 +41,20 @@ public class View extends JFrame{
     JMenu menuUpdate;
     JMenuItem menuAddHudebnik;
     JMenuItem menuAddVlastnik;
+    JMenuItem menuAddVyrobce;
+    JMenuItem menuAddNastroj;
+    JMenuItem menuAddNastrojToVlastnik;
     JMenuItem menuReadHudebnik;
     JMenuItem menuReadVlastnik;
+    JMenuItem menuReadVyrobce;
+    JMenuItem menuReadNastroj;
+    JMenuItem menuReadVlastnikWithNastroj;
+    JMenuItem menuReadNastrojWithVlastnik;
     JMenuItem menuRemoveHudebnik;
     JMenuItem menuRemoveVlastnik;
+    JMenuItem menuRemoveVyrobce;
+    JMenuItem menuRemoveNastroj;
+    JMenuItem menuRemoveNastrojToVlastnik;
     JMenuItem menuUpdateHudebnik;
     JMenuItem menuUpdateVlastnik;
   
@@ -118,6 +128,12 @@ public class View extends JFrame{
 	menuAdd.add(menuAddHudebnik);
 	menuAddVlastnik = new JMenuItem("Přidat vlastníka");
 	menuAdd.add(menuAddVlastnik);
+	menuAddVyrobce = new JMenuItem("Přidat výrobce");
+	menuAdd.add(menuAddVyrobce);
+	menuAddNastroj = new JMenuItem("Přidat nástroj");
+	menuAdd.add(menuAddNastroj);
+	menuAddNastrojToVlastnik = new JMenuItem("Přidat nástroj k vlastníkovi");
+	menuAdd.add(menuAddNastrojToVlastnik);
 	menu.add(menuAdd);
 	
 	menuRead = new JMenu("Vypsat");
@@ -125,6 +141,14 @@ public class View extends JFrame{
 	menuRead.add(menuReadHudebnik);
 	menuReadVlastnik = new JMenuItem("Vypsat vlastníky");
 	menuRead.add(menuReadVlastnik);
+	menuReadVyrobce = new JMenuItem("Vypsat výrobce");
+	menuRead.add(menuReadVyrobce);
+	menuReadNastroj = new JMenuItem("Vypsat nástroj");
+	menuRead.add(menuReadNastroj);
+	menuReadNastrojWithVlastnik = new JMenuItem("Vypsat nástroje s vlastníky");
+	menuRead.add(menuReadNastrojWithVlastnik);
+	menuReadVlastnikWithNastroj = new JMenuItem("Vypsat vlastníky s nástroji");
+	menuRead.add(menuReadVlastnikWithNastroj);
 	menu.add(menuRead);
 	
 //	menuUpdate = new JMenu("Upravit");
@@ -139,6 +163,12 @@ public class View extends JFrame{
 	menuRemove.add(menuRemoveHudebnik);
 	menuRemoveVlastnik = new JMenuItem("Odebrat vlastníka");
 	menuRemove.add(menuRemoveVlastnik);
+	menuRemoveVyrobce = new JMenuItem("Odebrat výrobce");
+	menuRemove.add(menuRemoveVyrobce);
+	menuRemoveNastroj = new JMenuItem("Odebrat Nástroj");
+	menuRemove.add(menuRemoveNastroj);
+	menuRemoveNastrojToVlastnik = new JMenuItem("Odebrat nástroj vlastníkovi");
+	menuRemove.add(menuRemoveNastrojToVlastnik);
 	menu.add(menuRemove);
     }
 
@@ -244,6 +274,46 @@ public class View extends JFrame{
 
     public EntityType getCurrentTableType() {
 	return currentTableType;
+    }
+
+    public JMenuItem getMenuAddVyrobce() {
+	return menuAddVyrobce;
+    }
+
+    public JMenuItem getMenuReadVyrobce() {
+	return menuReadVyrobce;
+    }
+
+    public JMenuItem getMenuRemoveVyrobce() {
+	return menuRemoveVyrobce;
+    }
+
+    public JMenuItem getMenuAddNastroj() {
+	return menuAddNastroj;
+    }
+
+    public JMenuItem getMenuReadNastroj() {
+	return menuReadNastroj;
+    }
+
+    public JMenuItem getMenuRemoveNastroj() {
+	return menuRemoveNastroj;
+    }
+
+    public JMenuItem getMenuAddNastrojToVlastnik() {
+	return menuAddNastrojToVlastnik;
+    }
+
+    public JMenuItem getMenuReadVlastnikWithNastroj() {
+	return menuReadVlastnikWithNastroj;
+    }
+
+    public JMenuItem getMenuReadNastrojWithVlastnik() {
+	return menuReadNastrojWithVlastnik;
+    }
+
+    public JMenuItem getMenuRemoveNastrojToVlastnik() {
+	return menuRemoveNastrojToVlastnik;
     }
     
 }

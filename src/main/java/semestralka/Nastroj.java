@@ -1,8 +1,11 @@
 package semestralka;
 
+import java.util.LinkedList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Nastroj {
@@ -13,8 +16,32 @@ public class Nastroj {
     private String cislo;
     private String nazev;
     private int cena;
+    @ManyToMany(targetEntity = Vlastnik.class)
+    private LinkedList<Vlastnik> vlastnikList = new LinkedList();
 
     public Nastroj() {
+    }
+    
+    public void addVlastnik(Vlastnik vlastnik){
+	boolean ok = true;
+	for(Vlastnik v : vlastnikList){
+	    if(v.getIdVlastnik()== vlastnik.getIdVlastnik()){
+		ok = false;
+		break;
+	    }
+	}
+	if(ok){
+	    vlastnikList.add(vlastnik);
+	}
+    }
+    
+    public void removeVlastnik(Vlastnik vlastnik){
+	for(Vlastnik v : vlastnikList){
+	    if(v.getIdVlastnik()== vlastnik.getIdVlastnik()){
+		vlastnikList.remove(vlastnik);
+		break;
+	    }
+	}
     }
 
     public Integer getId_nastroj() {
@@ -55,6 +82,14 @@ public class Nastroj {
 
     public void setCena(int cena) {
 	this.cena = cena;
+    }
+
+    public LinkedList getVlastnikList() {
+	return vlastnikList;
+    }
+
+    public void setVlastnikList(LinkedList vlastnikList) {
+	this.vlastnikList = vlastnikList;
     }
 
     @Override
