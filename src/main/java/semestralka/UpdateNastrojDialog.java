@@ -24,7 +24,7 @@ public class UpdateNastrojDialog extends JDialog{
  
     public UpdateNastrojDialog(Frame parent, Model model, int id) {
         super(parent, "Aktualizovat nástroj", true);
-        //
+        // create dialog form to get values from user
 	idToUpdate = id;
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints cs = new GridBagConstraints();
@@ -50,8 +50,8 @@ public class UpdateNastrojDialog extends JDialog{
 	
 	btnAdd.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
-			//model.updateVyrobce(idToUpdate, tfCityAndCountry.getText());
 			try{
+			    // call update method. If fails, show the warning dialog
 			    model.updateNastroj(idToUpdate, Integer.parseUnsignedInt(tfCost.getText()));
 			}
 			catch(NumberFormatException nfe){

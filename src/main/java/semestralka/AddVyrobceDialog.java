@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
 public class AddVyrobceDialog extends JDialog{
+    // jdialog to get values from user to store them into the database
     private JTextField tfName;
     private JTextField tfCityAndCountry;
     private JLabel lbName;
@@ -32,6 +33,7 @@ public class AddVyrobceDialog extends JDialog{
  
         cs.fill = GridBagConstraints.HORIZONTAL;
  
+	// prepare the dialog view
         lbName = new JLabel("Jméno: ");
         cs.gridx = 0;
         cs.gridy = 0;
@@ -63,6 +65,7 @@ public class AddVyrobceDialog extends JDialog{
 	
 	btnAdd.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
+			// check if the entity with got values exists or not
 			String s = tfName.getText() + " " + tfCityAndCountry.getText() + "\n";
 			List<Vyrobce> vyrobci = model.getListOfVyrobce();
 			boolean ok = true;
@@ -82,14 +85,15 @@ public class AddVyrobceDialog extends JDialog{
 			}
 			
 			if(ok){
-	               model.addVyrobce(tfName.getText(), tfCityAndCountry.getText());
-		       JOptionPane.showMessageDialog(AddVyrobceDialog.this,
-                            "Ok",
-                            "Záznam úspěšně přidán",
-                            JOptionPane.INFORMATION_MESSAGE);
-				dispose();
-			    
-		       dispose();
+			    // create new entity and add it to the database
+			    model.addVyrobce(tfName.getText(), tfCityAndCountry.getText());
+			    JOptionPane.showMessageDialog(AddVyrobceDialog.this,
+				 "Ok",
+				 "Záznam úspěšně přidán",
+				 JOptionPane.INFORMATION_MESSAGE);
+				     dispose();
+
+			    dispose();
 			}
 	            }
 	        });

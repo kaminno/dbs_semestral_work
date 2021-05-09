@@ -24,7 +24,7 @@ public class UpdateVyrobceDialog extends JDialog{
  
     public UpdateVyrobceDialog(Frame parent, Model model, int id) {
         super(parent, "Aktualizovat výrobce", true);
-        //
+        // create dialog form to get values from user
 	idToUpdate = id;
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints cs = new GridBagConstraints();
@@ -50,17 +50,8 @@ public class UpdateVyrobceDialog extends JDialog{
 	
 	btnAdd.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
+			// call update method. If fails, show the warning dialog
 			model.updateVyrobce(idToUpdate, tfCityAndCountry.getText());
-//			try{
-//			    model.updateVyrobce(idToUpdate, tfCityAndCountry.getText());
-//			}
-//			catch(NumberFormatException nfe){
-//			    JOptionPane.showMessageDialog(parent,
-//                            "Nesprávný formát počtu nástrojů",
-//                            "Špatná data",
-//                            JOptionPane.WARNING_MESSAGE);
-//				dispose();
-//			}
 			dispose();
 	            }
 	        });

@@ -19,14 +19,10 @@ public class Controller {
     }
     
     private void setActions(){
-	view.getBtnAdd().addActionListener(new ActionListener() { 
-	    public void actionPerformed(ActionEvent e) {
-	      
-	    } 
-	  } );
-	
+	// set actions to each menu item	
 	view.getMenuAddHudebnik().addActionListener(new ActionListener() { 
 	    public void actionPerformed(ActionEvent e) {
+		// show jdialog and let it to add new hudebnik
 		AddHudebnikDialog hd = new AddHudebnikDialog(view, model);
 		hd.setVisible(true);
 		hd.getBtnCancel().addActionListener(new ActionListener() {
@@ -41,6 +37,7 @@ public class Controller {
 	
 	view.getMenuAddVlastnik().addActionListener(new ActionListener() { 
 	    public void actionPerformed(ActionEvent e) {
+		// show jdialog and let it to add new vlastnik
 		AddVlastnikDialog hd = new AddVlastnikDialog(view, model);
 		hd.setVisible(true);
 		hd.getBtnCancel().addActionListener(new ActionListener() {
@@ -55,6 +52,7 @@ public class Controller {
 	
 	view.getMenuAddVyrobce().addActionListener(new ActionListener() { 
 	    public void actionPerformed(ActionEvent e) {
+		// show jdialog and let it to add new vyrobce
 		AddVyrobceDialog hd = new AddVyrobceDialog(view, model);
 		hd.setVisible(true);
 		hd.getBtnCancel().addActionListener(new ActionListener() {
@@ -69,6 +67,7 @@ public class Controller {
 	
 	view.getMenuAddNastroj().addActionListener(new ActionListener() { 
 	    public void actionPerformed(ActionEvent e) {
+		// show jdialog and let it to add new nastroj
 		AddNastrojDialog nd = new AddNastrojDialog(view, model);
 		nd.setVisible(true);
 		nd.getBtnCancel().addActionListener(new ActionListener() {
@@ -83,6 +82,7 @@ public class Controller {
 	
 	view.getMenuAddNastrojToVlastnik().addActionListener(new ActionListener() { 
 	    public void actionPerformed(ActionEvent e) {
+		// show jdialog and let it to add new nastroj to vlastnik
 		AddNastrojToVlastnikDialog nd = new AddNastrojToVlastnikDialog(view, model);
 		nd.setVisible(true);
 		nd.getBtnCancel().addActionListener(new ActionListener() {
@@ -97,6 +97,7 @@ public class Controller {
 	
 	view.getMenuReadHudebnik().addActionListener(new ActionListener() { 
 	    public void actionPerformed(ActionEvent e) {
+		// get the data from database and paste them in the table and textarea
 		String s = "";
 		List<Hudebnik> l = model.getListOfHudebnik();
 		
@@ -120,6 +121,7 @@ public class Controller {
 	
 	view.getMenuReadVlastnik().addActionListener(new ActionListener() { 
 	    public void actionPerformed(ActionEvent e) {
+		// get the data from database and paste them in the table and textarea
 		String s = "";
 		List<Vlastnik> l = model.getListOfVlastnik();
 		for(Vlastnik v : l){
@@ -141,6 +143,7 @@ public class Controller {
 	
 	view.getMenuReadVyrobce().addActionListener(new ActionListener() { 
 	    public void actionPerformed(ActionEvent e) {
+		// get the data from database and paste them in the table and textarea
 		String s = "";
 		List<Vyrobce> l = model.getListOfVyrobce();
 		for(Vyrobce v : l){
@@ -162,6 +165,7 @@ public class Controller {
 	
 	view.getMenuReadNastroj().addActionListener(new ActionListener() { 
 	    public void actionPerformed(ActionEvent e) {
+		// get the data from database and paste them in the table and textarea
 		String s = "";
 		List<Nastroj> l = model.getListOfNastroj();
 		for(Nastroj n : l){
@@ -183,6 +187,7 @@ public class Controller {
 	
 	view.getMenuReadNastrojWithVlastnik().addActionListener(new ActionListener() { 
 	    public void actionPerformed(ActionEvent e) {
+		// get the data from database and paste them in the table and textarea
 		String s = "";
 		List<Nastroj> l = model.getListOfNastroj();
 		for(Nastroj n : l){
@@ -214,6 +219,7 @@ public class Controller {
 	
 	view.getMenuReadVlastnikWithNastroj().addActionListener(new ActionListener() { 
 	    public void actionPerformed(ActionEvent e) {
+		// get the data from database and paste them in the table and textarea
 		String s = "";
 		List<Vlastnik> l = model.getListOfVlastnik();
 		for(Vlastnik v : l){
@@ -245,6 +251,7 @@ public class Controller {
 	
 	view.getMenuRemoveHudebnik().addActionListener(new ActionListener() { 
 	    public void actionPerformed(ActionEvent e) {
+		// remove the entity from database
 		String s = (String)JOptionPane.showInputDialog(
 			"Id"
 		);
@@ -253,6 +260,7 @@ public class Controller {
 		}
 		int i = -1;
 		boolean ok = true;
+		// check if the id is really id
 		try{
 			    i = Integer.parseInt(s);
 			    
@@ -265,6 +273,7 @@ public class Controller {
 			}
 		boolean rem = false;
 		if(ok){
+		    // if the id has an entity in database, remove it
 		    List<Hudebnik> l = model.getListOfHudebnik();
 		    for(Hudebnik h : l){
 			if(h.getId() == i){
@@ -287,6 +296,7 @@ public class Controller {
 	
 	view.getMenuRemoveVlastnik().addActionListener(new ActionListener() { 
 	    public void actionPerformed(ActionEvent e) {
+		// remove the entity from database
 		String s = (String)JOptionPane.showInputDialog(
 			"Id"
 		);
@@ -295,6 +305,7 @@ public class Controller {
 		}
 		int i = -1;
 		boolean ok = true;
+		// checks if the id is really id
 		try{
 			    i = Integer.parseInt(s);
 			    
@@ -307,6 +318,7 @@ public class Controller {
 			}
 		boolean rem = false;
 		if(ok){
+		    // if the id has entity in database, remove it
 		    List<Vlastnik> l = model.getListOfVlastnik();
 		    for(Vlastnik v : l){
 			if(v.getIdVlastnik()== i){
@@ -329,6 +341,7 @@ public class Controller {
 	
 	view.getMenuRemoveVyrobce().addActionListener(new ActionListener() { 
 	    public void actionPerformed(ActionEvent e) {
+		// remove the entity from database
 		String s = (String)JOptionPane.showInputDialog(
 			"Id"
 		);
@@ -337,6 +350,7 @@ public class Controller {
 		}
 		int i = -1;
 		boolean ok = true;
+		// check if the id is really id
 		try{
 			    i = Integer.parseInt(s);
 			    
@@ -349,6 +363,7 @@ public class Controller {
 			}
 		boolean rem = false;
 		if(ok){
+		    // if the id has entity in database, remove it
 		    List<Vyrobce> l = model.getListOfVyrobce();
 		    for(Vyrobce v : l){
 			if(v.getId_vyrobce()== i){
@@ -371,6 +386,7 @@ public class Controller {
 	
 	view.getMenuRemoveNastroj().addActionListener(new ActionListener() { 
 	    public void actionPerformed(ActionEvent e) {
+		// remove the entity from database
 		String s = (String)JOptionPane.showInputDialog(
 			"Id"
 		);
@@ -379,6 +395,7 @@ public class Controller {
 		}
 		int i = -1;
 		boolean ok = true;
+		// check if the id is really id
 		try{
 			    i = Integer.parseInt(s);
 			    
@@ -391,6 +408,7 @@ public class Controller {
 			}
 		boolean rem = false;
 		if(ok){
+		    // if the id has entity in database, remove it
 		    List<Nastroj> l = model.getListOfNastroj();
 		    for(Nastroj n : l){
 			if(n.getId_nastroj() == i){
@@ -413,7 +431,9 @@ public class Controller {
 	
 	view.getDeleteRow().addActionListener(new ActionListener() { 
 	    public void actionPerformed(ActionEvent e) {
+		// remove row from table
 		if((int)view.table.getSelectedRow() >= 0){
+		    // ask the user if he really want to delete the record
 		    int id = Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString());
 		    int n = JOptionPane.showConfirmDialog(
 			view,
@@ -421,10 +441,12 @@ public class Controller {
 			"Odstranit záznam?",
 			JOptionPane.YES_NO_OPTION);
 		    if(n == 0){
+			// if yes, remove the row and the record in database, based on the current entity shown in the table
 			if(view.currentTableType == EntityType.HUDEBNIK){
 			    model.removeHudebnik(id);
 			}
 			else if(view.currentTableType == EntityType.VLASTNIK){
+			    // removing the nastroj entity from the list
 			    Vlastnik v = null;
 			    List<Vlastnik> vv = model.getListOfVlastnik();
 			    for(Vlastnik vl : vv){
@@ -467,6 +489,7 @@ public class Controller {
 	
 	view.getUpdateRow().addActionListener(new ActionListener() { 
 	    public void actionPerformed(ActionEvent e) {
+		// update row and the record in the database
 		if((int)view.table.getSelectedRow() >= 0){
 		    int id = (int)view.table.getValueAt(view.table.getSelectedRow(), 0);
 			if(view.currentTableType == EntityType.HUDEBNIK){

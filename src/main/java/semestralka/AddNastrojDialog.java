@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
 public class AddNastrojDialog extends JDialog{
+    // jdialog to get values from user to store them into the database
     private JTextField tfProducer;
     private JTextField tfCode;
     private JTextField tfName;
@@ -36,6 +37,7 @@ public class AddNastrojDialog extends JDialog{
  
         cs.fill = GridBagConstraints.HORIZONTAL;
  
+	// prepare the dialog view
         lbProducer = new JLabel("Výrobce: ");
         cs.gridx = 0;
         cs.gridy = 0;
@@ -91,6 +93,7 @@ public class AddNastrojDialog extends JDialog{
 	
 	btnAdd.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
+			// check if the entity with got values exists or not
 			String s = tfProducer.getText() + " " + tfCode.getText() + " " + tfName.getText() + " " + tfCost.getText() + "\n";
 			List<Nastroj> nastroje = model.getListOfNastroj();
 			boolean ok = true;
@@ -107,6 +110,7 @@ public class AddNastrojDialog extends JDialog{
 			
 			if(ok){
 			    try{
+				// if the producer is not in the producers table, entity wont bo created
 				model.addNastroj(tfProducer.getText(), tfCode.getText(), tfName.getText(), Integer.parseUnsignedInt(tfCost.getText()));
 				JOptionPane.showMessageDialog(AddNastrojDialog.this,
 				    "Ok",

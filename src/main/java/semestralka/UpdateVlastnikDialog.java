@@ -28,7 +28,7 @@ public class UpdateVlastnikDialog extends JDialog{
  
     public UpdateVlastnikDialog(Frame parent, Model model, int id) {
         super(parent, "Aktualizovat vlastníka", true);
-        //
+        // create dialog form to get values from user
 	idToUpdate = id;
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints cs = new GridBagConstraints();
@@ -59,18 +59,6 @@ public class UpdateVlastnikDialog extends JDialog{
         cs.gridwidth = 2;
         panel.add(tfName, cs);
 	
-//	lbInstrumentNumber = new JLabel("Počet nástrojů: ");
-//        cs.gridx = 0;
-//        cs.gridy = 2;
-//        cs.gridwidth = 1;
-//        panel.add(lbInstrumentNumber, cs);
-// 
-//        tfInstrumentNumber = new JTextField(20);
-//        cs.gridx = 1;
-//        cs.gridy = 2;
-//        cs.gridwidth = 2;
-//        panel.add(tfInstrumentNumber, cs);
-	
         panel.setBorder(new LineBorder(Color.GRAY));
  
         btnAdd = new JButton("Aktualizovat");
@@ -79,7 +67,8 @@ public class UpdateVlastnikDialog extends JDialog{
 	btnAdd.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
 			try{
-			    model.updateVlastnik(idToUpdate, tfSurName.getText(), tfName.getText());//, Integer.parseUnsignedInt(tfInstrumentNumber.getText()));
+			    // call update method. If fails, show the warning dialog
+			    model.updateVlastnik(idToUpdate, tfSurName.getText(), tfName.getText());
 			}
 			catch(NumberFormatException nfe){
 			    JOptionPane.showMessageDialog(parent,

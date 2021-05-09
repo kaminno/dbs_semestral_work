@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 public class Model {
+    // contains methods to adding, removing, reading and updating data in database
     EntityManagerFactory emf;
     EntityManager em;
 
@@ -51,6 +52,7 @@ public class Model {
     }
     
     public void addNastroj(String producer, String produceNumber, String name, int price){
+		// check if the producer record is in the database yet and it's name could be used, or not
 		List<Vyrobce> l = getListOfVyrobce();
 		boolean ok = false;
 		for(Vyrobce v : l){

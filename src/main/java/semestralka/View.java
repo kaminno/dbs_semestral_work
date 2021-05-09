@@ -60,7 +60,6 @@ public class View extends JFrame{
   
     BorderLayout borderLayout;
     JTextArea textArea;
-    JButton btnAdd;
     
     EntityType currentTableType = null;
 
@@ -81,13 +80,10 @@ public class View extends JFrame{
 	
 	setJMenuBar(menu);
 	
-	
 	textArea = new JTextArea();
 	//textArea.setAutoscrolls(true);
 	textArea.setEditable(false);
 	textArea.setSize(200, 200);
-	
-	btnAdd = new JButton("Add");
 	
 	topPanel2 = new JPanel();
 	topPanel2.setBackground(Color.blue);
@@ -95,7 +91,6 @@ public class View extends JFrame{
 	topPanel2.setVisible(false);
 	pane.add(topPanel2, BorderLayout.NORTH);
 	
-	topPanel.add(btnAdd);
 	topPanel.setBackground(Color.red);
 	//btnAdd.setVisible(false);
 	topPanel.setPreferredSize(new Dimension(100, 50));
@@ -151,13 +146,6 @@ public class View extends JFrame{
 	menuRead.add(menuReadVlastnikWithNastroj);
 	menu.add(menuRead);
 	
-//	menuUpdate = new JMenu("Upravit");
-//	menuUpdateHudebnik = new JMenuItem("Upravit hudebníka");
-//	menuUpdate.add(menuUpdateHudebnik);
-//	menuUpdateVlastnik = new JMenuItem("Upravit vlastníka");
-//	menuUpdate.add(menuUpdateVlastnik);
-//	menu.add(menuUpdate);
-	
 	menuRemove = new JMenu("Odstranit");
 	menuRemoveHudebnik = new JMenuItem("Odebrat hudebníka");
 	menuRemove.add(menuRemoveHudebnik);
@@ -198,10 +186,6 @@ public class View extends JFrame{
 
     public JTextArea getTextArea() {
 	return textArea;
-    }
-
-    public JButton getBtnAdd() {
-	return btnAdd;
     }
 
     public Container getPane() {

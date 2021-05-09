@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
 public class AddNastrojToVlastnikDialog extends JDialog{
+    // jdialog to get values from user to store them into the database
     private JTextField tfInstrumentId;
     private JTextField tfOwnerId;
     private JLabel lbInstrumentId;
@@ -32,6 +33,7 @@ public class AddNastrojToVlastnikDialog extends JDialog{
  
         cs.fill = GridBagConstraints.HORIZONTAL;
  
+	// prepare the dialog view
         lbInstrumentId = new JLabel("Id nástroje: ");
         cs.gridx = 0;
         cs.gridy = 0;
@@ -63,6 +65,7 @@ public class AddNastrojToVlastnikDialog extends JDialog{
 	
 	btnAdd.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
+			// check if the entities with got ids exists or not
 			List<Vlastnik> vlastnici = model.getListOfVlastnik();
 			boolean ok_v = false;
 			boolean ok_n = false;
@@ -93,24 +96,24 @@ public class AddNastrojToVlastnikDialog extends JDialog{
 			
 			
 			if(ok_v && ok_n){
-			    
-	               model.addNastrojToVlastnik(Integer.parseInt(tfInstrumentId.getText()), Integer.parseInt(tfOwnerId.getText()));
-		       JOptionPane.showMessageDialog(AddNastrojToVlastnikDialog.this,
-                            "Ok",
-                            "Záznam úspěšně přidán",
-                            JOptionPane.INFORMATION_MESSAGE);
-				dispose();
-			    
-		       dispose();
+			    // add Nastroj and Vlastnik to coresponding lists to create the relationship
+			    model.addNastrojToVlastnik(Integer.parseInt(tfInstrumentId.getText()), Integer.parseInt(tfOwnerId.getText()));
+			    JOptionPane.showMessageDialog(AddNastrojToVlastnikDialog.this,
+				 "Ok",
+				 "Záznam úspěšně přidán",
+				 JOptionPane.INFORMATION_MESSAGE);
+				     dispose();
+
+			    dispose();
 			}
 			else{
-			     JOptionPane.showMessageDialog(AddNastrojToVlastnikDialog.this,
-                            "Špatné id: " + tfInstrumentId.getText() + " " + tfOwnerId.getText(),
-                            "Chyba",
-                            JOptionPane.INFORMATION_MESSAGE);
-				dispose();
-			    
-		       dispose();
+			    JOptionPane.showMessageDialog(AddNastrojToVlastnikDialog.this,
+				"Špatné id: " + tfInstrumentId.getText() + " " + tfOwnerId.getText(),
+				"Chyba",
+				JOptionPane.INFORMATION_MESSAGE);
+				    dispose();
+
+			   dispose();
 			}
 	            }
 		    

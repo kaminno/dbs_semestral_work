@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
 public class AddHudebnikDialog extends JDialog{
+    // jdialog to get values from user to store them into the database
     private JTextField tfSurName;
     private JTextField tfName;
     private JTextField tfBirthDateNumber;
@@ -34,7 +35,8 @@ public class AddHudebnikDialog extends JDialog{
         GridBagConstraints cs = new GridBagConstraints();
  
         cs.fill = GridBagConstraints.HORIZONTAL;
- 
+	
+	// prepare the dialog view
         lbSurName = new JLabel("Jméno: ");
         cs.gridx = 0;
         cs.gridy = 0;
@@ -79,6 +81,7 @@ public class AddHudebnikDialog extends JDialog{
 	
 	btnAdd.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
+			// check if the entity with got values exists or not
 			String s = tfSurName.getText() + " " + tfName.getText() + " " + tfBirthDateNumber.getText() + "\n";
 			List<Hudebnik> hudebnici = model.getListOfHudebnik();
 			boolean ok = true;
@@ -93,6 +96,7 @@ public class AddHudebnikDialog extends JDialog{
 			    }
 			}
 			
+			// checks if the birthdate number is really number or not
 			try{
 			    long i = Long.parseLong(tfBirthDateNumber.getText());
 			    if(tfBirthDateNumber.getText().length() != 10){
@@ -112,14 +116,15 @@ public class AddHudebnikDialog extends JDialog{
 				dispose();
 			}
 			if(ok){
-	               model.addHudebnik(tfSurName.getText(), tfName.getText(), tfBirthDateNumber.getText());
-		       JOptionPane.showMessageDialog(AddHudebnikDialog.this,
-                            "Ok",
-                            "Záznam úspěšně přidán",
-                            JOptionPane.INFORMATION_MESSAGE);
-				dispose();
-			    
-		       dispose();
+			    // create new entity and add it to the database
+			    model.addHudebnik(tfSurName.getText(), tfName.getText(), tfBirthDateNumber.getText());
+			    JOptionPane.showMessageDialog(AddHudebnikDialog.this,
+				 "Ok",
+				 "Záznam úspěšně přidán",
+				 JOptionPane.INFORMATION_MESSAGE);
+				     dispose();
+
+			    dispose();
 			}
 	            }
 	        });

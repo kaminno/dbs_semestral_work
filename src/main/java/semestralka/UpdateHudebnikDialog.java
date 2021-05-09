@@ -27,7 +27,7 @@ public class UpdateHudebnikDialog extends JDialog{
  
     public UpdateHudebnikDialog(Frame parent, Model model, int id) {
         super(parent, "Aktualizovat hudebníka", true);
-        //
+        // create dialog form to get values from user
 	idToUpdate = id;
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints cs = new GridBagConstraints();
@@ -65,6 +65,7 @@ public class UpdateHudebnikDialog extends JDialog{
 	
 	btnAdd.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
+			// call update method
 			model.updateHudebnik(idToUpdate, tfSurName.getText(), tfName.getText());
 			dispose();
 	            }
